@@ -1,0 +1,58 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+.venv/
+.venv_*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.model_cache/
+
+# Node / frontend
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Runtime and generated outputs
+runtime/
+results/
+artifacts/
+runs/
+output/
+tmp/
+*.log
+*.stdout
+*.stderr
+*.pid
+
+# Industrial source data and trained models
+data/
+datasets/
+dataset_*/
+*.pdf
+*.doc
+*.docx
+*.xlsx
+*.xls
+*.csv
+*.pt
+*.pth
+*.onnx
+
+# Archives and OS/editor files
+*.zip
+*.tar
+*.tar.gz
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

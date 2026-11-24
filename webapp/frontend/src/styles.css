@@ -1,0 +1,370 @@
+@import "tailwindcss";
+
+/* ─── BASE ──────────────────────────────────────────────────────────────── */
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #142b4f;
+  background: #f3f5f7;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* { box-sizing: border-box; }
+html { background: #f3f5f7; scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #f3f5f7; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+.app-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 60; display: flex; width: 252px; flex-direction: column; background: linear-gradient(180deg,#0b2142 0%,#102d52 65%,#0b2443 100%); color: white; }
+.sidebar-brand { display:flex; align-items:center; gap:12px; min-height:90px; padding:20px 24px; border-bottom:1px solid rgba(255,255,255,.1); }
+.sidebar-mark { display:grid; place-items:center; width:34px; height:34px; border:1px solid rgba(147,197,253,.35); color:#a9d8ff; font-size:21px; }
+.sidebar-nav { display:flex; flex-direction:column; gap:5px; padding:24px 14px; }
+.sidebar-nav button { display:flex; align-items:center; gap:12px; border-left:2px solid transparent; padding:12px 16px; color:rgba(226,239,255,.74); text-align:left; font-size:14px; font-weight:600; transition:all .18s ease; }
+.sidebar-nav button:hover,.sidebar-nav button.active { border-left-color:#4da3ff; background:rgba(61,132,215,.35); color:white; }
+.sidebar-footer { margin-top:auto; padding:24px; color:rgba(226,239,255,.58); font-size:12px; }
+.app-shell-main { min-height:100vh; margin-left:252px; }
+.workspace-welcome { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; max-width:1120px; margin:0 auto; padding:44px 40px 10px; }
+@media (max-width: 800px) { .app-sidebar { position:static; width:100%; min-height:0; } .sidebar-nav { flex-direction:row; overflow:auto; padding:8px 12px; } .sidebar-nav button { border-left:0; border-bottom:2px solid transparent; white-space:nowrap; } .sidebar-nav button:hover,.sidebar-nav button.active { border-bottom-color:#4da3ff; border-left:0; } .sidebar-footer { display:none; } .app-shell-main { margin-left:0; } .workspace-welcome { align-items:flex-start; flex-direction:column; padding:28px 20px 8px; } }
+
+/* ─── HERO ───────────────────────────────────────────────────────────────── */
+.jesa-hero {
+  background-color: #062761;
+  background-image: url('/pfd-industrial-hero.png');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+/* Ensure strong overlay so the title is always readable at any image brightness */
+.jesa-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(4, 27, 77, 0.96) 0%,
+    rgba(6, 39, 97, 0.82) 40%,
+    rgba(7, 61, 146, 0.42) 75%,
+    rgba(7, 61, 146, 0.12) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.jesa-hero > * { position: relative; z-index: 2; }
+
+/* ─── GRID BACKGROUND ────────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(152,238,224,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(152,238,224,.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── GLASS CARDS ────────────────────────────────────────────────────────── */
+.glass {
+  background: #fff;
+  border: 1px solid #d4dce8;
+  box-shadow: 0 2px 8px rgba(7,61,146,.04), 0 8px 24px rgba(7,61,146,.06);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.project-cover {
+  position: relative;
+  height: 9rem;
+  overflow: hidden;
+  background-color: #0b2c5d;
+  background-image: linear-gradient(90deg, rgba(5, 28, 65, .72), rgba(7, 61, 146, .12)), url('/pfd-industrial-hero.png');
+  background-size: auto 100%, cover;
+  background-repeat: no-repeat;
+  transition: background-position .45s ease, transform .45s ease;
+}
+
+.group:hover .project-cover { transform: scale(1.025); }
+
+.project-cover-label {
+  position: absolute;
+  left: 1rem;
+  bottom: .85rem;
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0,0,0,.45);
+}
+
+.project-cover-count {
+  position: absolute;
+  top: .8rem;
+  right: .8rem;
+  border-radius: 999px;
+  background: rgba(4, 24, 58, .88);
+  color: #fff;
+  padding: .38rem .72rem;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .03em;
+}
+.glass:hover {
+  box-shadow: 0 4px 16px rgba(7,61,146,.08), 0 12px 32px rgba(7,61,146,.09);
+  border-color: #bfcfe8;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────────────────── */
+.eyebrow {
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: .69rem;
+  color: #073d92;
+  font-weight: 700;
+}
+.display {
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: -.055em;
+}
+.tag-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+  font-size: .8rem;
+  letter-spacing: .02em;
+}
+
+/* ─── STAT CARDS ─────────────────────────────────────────────────────────── */
+.stat-card {
+  background: #fff;
+  border: 1px solid #d4dce8;
+  border-left: 3px solid #073d92;
+  box-shadow: 0 2px 8px rgba(7,61,146,.05);
+  padding: 1.5rem;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7,61,146,.10);
+}
+.stat-card-warn {
+  border-left-color: #d97706;
+}
+
+/* ─── ASSOCIATION BADGES ──────────────────────────────────────────────────── */
+.badge-associated {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  background: #eff8f5;
+  color: #0e7a52;
+  border: 1px solid #a3d9c6;
+  border-radius: 3px;
+}
+.badge-ambiguous {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  border-radius: 3px;
+}
+.badge-unassociated {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  background: #f8f9fa;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+}
+.badge-connected {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 3px;
+}
+.badge-isolated {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  border-radius: 3px;
+}
+
+/* ─── JOB STATUS TIMELINE ────────────────────────────────────────────────── */
+.job-step {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .625rem 0;
+  font-size: .85rem;
+  color: #64748b;
+  transition: color 200ms;
+}
+.job-step.active { color: #073d92; font-weight: 600; }
+.job-step.done { color: #0e7a52; }
+.job-step.error { color: #dc2626; }
+.job-step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d4dce8;
+  flex-shrink: 0;
+  transition: background 200ms;
+}
+.job-step.active .job-step-dot {
+  background: #073d92;
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+.job-step.done .job-step-dot { background: #0e7a52; }
+.job-step.error .job-step-dot { background: #dc2626; }
+
+/* ─── TABLE ENHANCEMENTS ──────────────────────────────────────────────────── */
+.tbl-row {
+  transition: background 140ms ease;
+}
+.tbl-row:hover { background: #f0f5ff; }
+
+/* ─── PROGRESS BAR ───────────────────────────────────────────────────────── */
+.progress-bar-track {
+  height: 3px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #073d92 0%, #2f80ed 100%);
+  border-radius: 2px;
+  animation: progress-indeterminate 1.5s ease-in-out infinite;
+  transform-origin: left;
+}
+@keyframes progress-indeterminate {
+  0%   { transform: translateX(-100%) scaleX(.4); }
+  50%  { transform: translateX(50%)  scaleX(.8); }
+  100% { transform: translateX(200%) scaleX(.4); }
+}
+
+/* ─── MICRO-ANIMATIONS ───────────────────────────────────────────────────── */
+.fade-up { animation: fade-up .55s cubic-bezier(.22,.68,0,1.1) both; }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(7,61,146,.45); }
+  50%       { box-shadow: 0 0 0 6px rgba(7,61,146,.0); }
+}
+
+@keyframes draw-path {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes float-dot {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  8%   { opacity: 1; }
+  90%  { opacity: .8; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* ─── NODE CARDS (React Flow) ────────────────────────────────────────────── */
+.node-card {
+  border: 1px solid rgba(230,245,240,.22);
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #f8fffb;
+  min-width: 148px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25), 0 1px 4px rgba(0,0,0,.15);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+.node-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+  transform: translateY(-1px);
+}
+.node-card .tag  { font-weight: 750; font-size: 11px; font-family: ui-monospace, monospace; letter-spacing: .03em; }
+.node-card .kind { font-size: 9px; opacity: .78; margin-top: 4px; text-transform: uppercase; letter-spacing: .12em; }
+
+/* ─── JESA APP SURFACE OVERRIDES ─────────────────────────────────────────── */
+/* Rebase dark-mode Tailwind classes to the light JESA engineering palette.
+   The hero section (.jesa-hero) is EXCLUDED — it must keep white text on its
+   dark photo overlay, so :not(.jesa-hero):not(.jesa-hero *) guards are applied.
+   Elements with a dark coloured background (blue, amber, red, green) are also
+   excluded so button labels remain legible. */
+.jesa-app main { color: #142b4f; }
+
+/* Only override text-white OUTSIDE the hero AND outside dark-background elements */
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *):not([class*="bg-[#073d92]"]):not([class*="bg-[#062"]):not([class*="bg-amber"]):not([class*="bg-red"]):not([class*="bg-green"]):not([class*="bg-blue"]):not([class*="bg-cyan"])[class*="text-white"]     { color: #073d92 !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="text-slate-300"] { color: #50627c !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="text-slate-400"],
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="text-slate-500"] { color: #667894 !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="text-slate-100"] { color: #142b4f !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="text-cyan-100"],
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="text-cyan-50"]  { color: #073d92 !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="border-white"]  { border-color: #d4dce8 !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="bg-white/5"]    { background-color: #edf2f8 !important; }
+.jesa-app main :not(.jesa-hero):not(.jesa-hero *)[class*="bg-white/10"]   { background-color: #f4f7fb !important; }
+.jesa-app main [class*="bg-\\[\\#071015\\]"] { background-color: #0a285b !important; color: #f4f8ff !important; }
+.jesa-app main [class*="bg-\\[\\#102126\\]"] { background-color: #fff    !important; color: #142b4f !important; }
+.jesa-app main select, .jesa-app main input { color: #142b4f; }
+.jesa-app main select option { background: #fff; color: #142b4f; }
+
+/* JESA-blue buttons must always show white text */
+.jesa-app main [class*="bg-[#073d92]"],
+.jesa-app main [class*="bg-[#062f71]"],
+.jesa-app main [class*="bg-[#062761]"] {
+  color: #ffffff;
+}
+.jesa-app main [class*="bg-[#073d92]"] * ,
+.jesa-app main [class*="bg-[#062f71]"] *,
+.jesa-app main [class*="bg-[#062761]"] * {
+  color: #ffffff !important;
+}
+
+/* Hero section: keep all text truly white */
+.jesa-app main .jesa-hero,
+.jesa-app main .jesa-hero * {
+  color: inherit;
+}
+.jesa-app main .jesa-hero .text-white  { color: #ffffff !important; }
+.jesa-app main .jesa-hero h1           { color: #ffffff !important; }
+.jesa-app main .jesa-hero p            { color: #dbeafe !important; }
+.jesa-app main .jesa-hero [class*="text-blue-50"]  { color: #eff6ff !important; }
+.jesa-app main .jesa-hero [class*="text-blue-100"] { color: #dbeafe !important; }
+.jesa-app main .jesa-hero [class*="text-blue-200"] { color: #bfdbfe !important; }
+
+/* Node cards always stay dark (coloured backgrounds from classColors map) */
+.jesa-app main .node-card,
+.jesa-app main .node-card * { color: #fff !important; }
+
+/* React Flow canvas */
+.jesa-app main .react-flow               { background: #f7f9fc; }
+.jesa-app main .react-flow__controls-button { background: #fff; border-bottom-color: #d4dce8; color: #073d92; }
+.jesa-app main .react-flow__minimap      { background: #fff; border: 1px solid #d4dce8; }
+.jesa-app main .react-flow__edge-path    { stroke: #8da8c8; }

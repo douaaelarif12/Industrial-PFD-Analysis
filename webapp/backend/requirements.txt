@@ -1,0 +1,6 @@
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.20
+# Matches the already functioning project Python environment. This pin avoids a
+# newer pydantic-core wheel blocked by the local Windows application-control policy.
+pydantic==2.13.4
